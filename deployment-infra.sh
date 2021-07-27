@@ -31,9 +31,27 @@ echo "Enabling required APIs and Service Accounts"
 echo "Creating VMs"
 ./landing-zone-infra.sh
 
+# Setting up VXLAN on VMs
+echo "Setting UP $ABM_WS"
+./script-for-vms/workstation.sh
+
+echo "Setting UP $ABM_CP1"
+./script-for-vms/controlplane-1.sh
+
+echo "Setting UP $ABM_CP2"
+./script-for-vms/controlplane-2.sh
+
+echo "Setting UP $ABM_CP3"
+./script-for-vms/controlplane-3.sh
+
+echo "Setting UP $ABM_WN1"
+./script-for-vms/worker-node1.sh
+
+echo "Setting UP $ABM_WN2"
+./script-for-vms/worker-node2.sh
+
 echo ""
 echo "Deployment Completed"
 echo ""
 echo 'To continue setting up Anthos please run "./deployment-anthos.sh"'
 echo ""
-
