@@ -17,8 +17,8 @@
 echo "This script must be executed from the Cloud Shell" 
 
 # Load Variables
-set -xeu
-source ./variables.env
+set -eu
+#source ./variables.env
 
 # Define variable i for IP aloocation
 i=5
