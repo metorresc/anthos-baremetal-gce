@@ -16,14 +16,11 @@
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
 source ./variables.env
+set -xeu
 
 # SSH into the VM as root
 echo "Logging as root into $ABM_WS"
 gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --project "$PROJECT_ID"
-
-# Load Variables
-set -x
-source ./variables.env
 
 # Installing BMCTL, KUBECTL & DOCKER
 echo "Installing bmctl, kubectl and generating keys for service account"
