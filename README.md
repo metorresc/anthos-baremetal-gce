@@ -14,4 +14,26 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 
-## Still under construction
+## Clone this repository to begin
+
+     git clone https://github.com/manueltorresc/anthos-baremetal-gce.git
+
+## Set all the deployment parameters on the variables.env file using nano or vim
+
+     nano variables.env
+
+or
+
+     vim variables.env
+
+## This script must be executed from Cloud Shell
+For GCE Infra deployment please execute
+
+     chmod +x deployment-infra.sh
+     ./deployment-infra.sh
+
+For Anthos Software deployment on GCE please execute
+     
+     chmod +x deployment-anthos.sh
+     ./deployment-anthos.sh
+
