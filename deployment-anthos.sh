@@ -23,6 +23,7 @@ gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --pr
 
 # Load Variables
 set -x
+source ./variables.env
 
 # Installing BMCTL, KUBECTL & DOCKER
 echo "Installing bmctl, kubectl and generating keys for service account"
