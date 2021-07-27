@@ -28,9 +28,10 @@ echo "VM Type: $MACHINE_TYPE"
 echo "==================================================="
 echo ""
 echo "Continuing in 5 seconds. Ctrl+C to cancel"
-sleep 10
+sleep 5
 
 # Creating Anthos Workstation
+echo ""
 echo "Creating Anthos Workstation" 
 gcloud compute instances create $ABM_WS \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -46,6 +47,7 @@ gcloud compute instances create $ABM_WS \
         --machine-type e2-standard-2
 
 # Creating Anthos Control Plane # 1
+echo ""
 echo "Creating Anthos Control Plane # 1" 
 gcloud compute instances create $ABM_CP1 \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -61,6 +63,7 @@ gcloud compute instances create $ABM_CP1 \
         --machine-type $MACHINE_TYPE
 
 # Creating Anthos Control Plane # 2
+echo ""
 echo "Creating Anthos Control Plane # 2" 
 gcloud compute instances create $ABM_CP2 \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -76,6 +79,7 @@ gcloud compute instances create $ABM_CP2 \
         --machine-type $MACHINE_TYPE
 
 # Creating Anthos Control Plane # 3
+echo ""
 echo "Creating Anthos Control Plane # 3" 
 gcloud compute instances create $ABM_CP3 \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -91,6 +95,7 @@ gcloud compute instances create $ABM_CP3 \
         --machine-type $MACHINE_TYPE
 
 # Creating Anthos Worker Node # 1
+echo ""
 echo "Creating Anthos Worker Node # 1"
 gcloud compute instances create $ABM_WN1 \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -106,6 +111,7 @@ gcloud compute instances create $ABM_WN1 \
         --machine-type $MACHINE_TYPE
 
 # Creating Anthos Worker Node # 2
+echo ""
 echo "Creating Anthos Worker Node # 2" 
 gcloud compute instances create $ABM_WN2 \
         --image-family=ubuntu-2004-lts --image-project=ubuntu-os-cloud \
@@ -120,9 +126,11 @@ gcloud compute instances create $ABM_WN2 \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
 
+echo ""
 echo "Testing if the VMs were created correctly"
 gcloud compute instances list
 
+echo ""
 echo "========================="
 echo "VMs deployment completed"
 echo "========================="

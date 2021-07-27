@@ -33,6 +33,7 @@ else
 fi
 
 # Enable the required APIs
+echo ""
 echo "Enabling APIs"
 gcloud services enable \
     anthos.googleapis.com \
@@ -71,6 +72,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" \
   --role="roles/stackdriver.resourceMetadata.writer"
 
+echo ""
 echo "========================="
 echo "APIs & Security Completed"
 echo "========================="

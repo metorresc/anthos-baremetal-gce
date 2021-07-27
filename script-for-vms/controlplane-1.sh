@@ -13,17 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script must be executed from the Anthos Workstation
-echo "This script must be executed from Cloud Shell" 
+# This script must be executed from the Anthos Workstation or Cloud Shell
 
 # Load Variables
 set -eu
+#source ../variables.env
 
 # Define variable i for IP allocation
 i=3
 
 # SSH into the VM as root
-gcloud beta compute ssh --zone "$ZONE" "root@$ABM_CP1"  --tunnel-through-iap --project "$PROJECT_ID"
+gcloud beta compute ssh --zone "$ZONE" "root@$ABM_CP1"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
 
 #Install required packages
 apt-get -qq update > /dev/null
@@ -42,3 +42,4 @@ ip addr add 10.200.0.$i/24 dev vxlan0
 ip link set up dev vxlan0
 systemctl stop apparmor.service
 systemctl disable apparmor.service
+EOF

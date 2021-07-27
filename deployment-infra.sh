@@ -14,59 +14,99 @@
 # limitations under the License.
 
 echo ""
+echo "==================================================="
 echo "Preparing to execute ABM on GCE Deployment Script"
 echo "==================================================="
 echo ""
-echo "Continuing in 10 seconds. Ctrl+C to cancel"
-sleep 10
+echo "Continuing in 5 seconds. Ctrl+C to cancel"
+sleep 5
 
 source ./variables.env
 set -eu
 
+echo ""
+echo "==========================================="
 echo "Granting execution privileges to the script"
+echo "==========================================="
 chmod +x gce-deployment-default-nw.sh
 chmod +x gce-deployment-shared-vpc.sh
+chmod +x landing-zone-security.sh
 chmod +x script-for-vms/controlplane-1.sh
 chmod +x script-for-vms/controlplane-2.sh
 chmod +x script-for-vms/controlplane-3.sh
 chmod +x script-for-vms/worker-node1.sh
 chmod +x script-for-vms/worker-node2.sh
 chmod +x script-for-vms/workstation.sh
+sleep 3
 
 # Enable APIs and Creating Service Account
+echo ""
+echo "==========================================="
 echo "Enabling required APIs and Service Accounts"
+echo "==========================================="
 ./landing-zone-security.sh
+sleep 3
 
 # Validate the network configuration
+echo ""
+echo "=========================="
+echo "Pre Checks for VM Creation"
+echo "=========================="
+
 if [ "$NW_TYPE" = "default-vpc" ];then 
   ./gce-deployment-default-nw.sh
-else if [ "$NW_TYPE" = "shared-vpc" ];then 
-  ./gce-deployment-shared-vpc.sh 
 else
-  echo "Creating VMs using $NW_TYPE"
+  ./gce-deployment-shared-vpc.sh 
 fi
+sleep 3
 
 # Setting up VXLAN on VMs
+echo ""
+echo "=================="
 echo "Setting UP $ABM_WS"
+echo "=================="
 ./script-for-vms/workstation.sh
-
-echo "Setting UP $ABM_CP1"
-./script-for-vms/controlplane-1.sh
-
-echo "Setting UP $ABM_CP2"
-./script-for-vms/controlplane-2.sh
-
-echo "Setting UP $ABM_CP3"
-./script-for-vms/controlplane-3.sh
-
-echo "Setting UP $ABM_WN1"
-./script-for-vms/worker-node1.sh
-
-echo "Setting UP $ABM_WN2"
-./script-for-vms/worker-node2.sh
+sleep 3
 
 echo ""
+echo "==================="
+echo "Setting UP $ABM_CP1"
+echo "==================="
+./script-for-vms/controlplane-1.sh
+sleep 3
+
+echo ""
+echo "==================="
+echo "Setting UP $ABM_CP2"
+echo "==================="
+./script-for-vms/controlplane-2.sh
+sleep 3
+
+echo ""
+echo "==================="
+echo "Setting UP $ABM_CP3"
+echo "==================="
+./script-for-vms/controlplane-3.sh
+sleep 3
+
+echo ""
+echo "==================="
+echo "Setting UP $ABM_WN1"
+echo "==================="
+./script-for-vms/worker-node1.sh
+sleep 3
+
+echo ""
+echo "==================="
+echo "Setting UP $ABM_WN2"
+echo "==================="
+./script-for-vms/worker-node2.sh
+sleep 3
+
+echo ""
+echo "===================="
 echo "Deployment Completed"
+echo "===================="
 echo ""
 echo 'To continue setting up Anthos please run "./deployment-anthos.sh"'
 echo ""
