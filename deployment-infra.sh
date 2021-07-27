@@ -23,10 +23,6 @@ sleep 10
 source ./variables.env
 set -xeu
 
-# Grant execution privileges to scripts
-# echo "Grant execution privileges to this script"
-# chmod +x 
-
 # Enable APIs and Creating Service Account
 echo "Enabling required APIs and Service Accounts"
 ./landing-zone-security.sh
