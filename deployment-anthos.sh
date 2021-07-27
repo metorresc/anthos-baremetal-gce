@@ -15,12 +15,12 @@
 
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
-source variables.env
+source ./variables.env
 set -eu
 
 # SSH into the VM as root
 echo "Logging as root into $ABM_WS"
-gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --project "$PROJECT_ID"
+gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
 
 # Installing BMCTL, KUBECTL & DOCKER
 echo "Installing bmctl, kubectl and generating keys for service account"
@@ -28,7 +28,7 @@ echo "Installing bmctl, kubectl and generating keys for service account"
 # Create ABM Keys for Service Account
 echo "Generating keys for the Service Account"
 gcloud iam service-accounts keys create bm-gcr.json \
---iam-account=baremetal-gcr@\$PROJECT_ID.iam.gserviceaccount.com
+--iam-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com
 
 # Download bmctl & kubectl
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
