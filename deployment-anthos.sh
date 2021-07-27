@@ -16,7 +16,7 @@
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
 source ./variables.env
-set -xeu
+set -eu
 
 # SSH into the VM as root
 echo "Logging as root into $ABM_WS"
