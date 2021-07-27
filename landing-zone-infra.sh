@@ -14,7 +14,7 @@
 # limitations under the License.
 
 source ./variables.env
-set -xeu
+set -eu
 
 echo ""
 echo "Preparing to execute with the following values:"
