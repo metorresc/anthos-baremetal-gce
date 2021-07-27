@@ -21,7 +21,17 @@ echo "Continuing in 10 seconds. Ctrl+C to cancel"
 sleep 10
 
 source ./variables.env
-set -xeu
+set -eu
+
+echo "Granting execution privileges to the script"
+chmod +x landing-zone-infra.sh
+chmod +x landing-zone-security.sh
+chmod +x script-for-vms/controlplane-1.sh
+chmod +x script-for-vms/controlplane-2.sh
+chmod +x script-for-vms/controlplane-3.sh
+chmod +x script-for-vms/worker-node1.sh
+chmod +x script-for-vms/worker-node2.sh
+chmod +x script-for-vms/workstation.sh
 
 # Enable APIs and Creating Service Account
 echo "Enabling required APIs and Service Accounts"
