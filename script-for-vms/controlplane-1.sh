@@ -15,9 +15,10 @@
 
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from Cloud Shell" 
+
 # Load Variables
-set -xeu
-source ./variables.env
+set -eu
+source ./../variables.env
 
 # Define variable i for IP allocation
 i=3
