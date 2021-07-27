@@ -36,4 +36,3 @@ For Anthos Software deployment on GCE please execute
      
      chmod +x deployment-anthos.sh
      ./deployment-anthos.sh
-
