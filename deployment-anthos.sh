@@ -15,7 +15,7 @@
 
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
-source ./variables.env
+source variables.env
 set -eu
 
 # SSH into the VM as root

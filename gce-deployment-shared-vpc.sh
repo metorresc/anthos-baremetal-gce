@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ./variables.env
+source variables.env
 set -eu
 
 echo ""
@@ -22,13 +22,12 @@ echo "==================================================="
 echo "Project ID: $PROJECT_ID"
 echo "Region for Deployment: $REGION"
 echo "Zone for Deployment: $ZONE"
-#echo "Shared VPC Project ID: $SHARED_VPC_PROJECT_ID"
-#echo "Shared Subnet Name: $SUBNET_NAME"
+echo "Network Configuration: $NW_TYPE"
 echo "Zone for Deployment: $ZONE"
 echo "VM Type: $MACHINE_TYPE"
 echo "==================================================="
 echo ""
-echo "Continuing in 10 seconds. Ctrl+C to cancel"
+echo "Continuing in 5 seconds. Ctrl+C to cancel"
 sleep 10
 
 # Creating Anthos Workstation
@@ -39,9 +38,6 @@ gcloud compute instances create $ABM_WS \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -57,9 +53,6 @@ gcloud compute instances create $ABM_CP1 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC        
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -75,9 +68,6 @@ gcloud compute instances create $ABM_CP2 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC        
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -93,9 +83,6 @@ gcloud compute instances create $ABM_CP3 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC        
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -111,9 +98,6 @@ gcloud compute instances create $ABM_WN1 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC        
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -129,9 +113,6 @@ gcloud compute instances create $ABM_WN2 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
- #      Comment the following line only if you are using a Shared VPC
- #       --network default \
- #      Comment the following line only if you are using The Default VPC        
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
@@ -141,3 +122,7 @@ gcloud compute instances create $ABM_WN2 \
 
 echo "Testing if the VMs were created correctly"
 gcloud compute instances list
+
+echo "========================="
+echo "VMs deployment completed"
+echo "========================="

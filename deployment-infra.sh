@@ -24,8 +24,8 @@ source ./variables.env
 set -eu
 
 echo "Granting execution privileges to the script"
-chmod +x landing-zone-infra.sh
-chmod +x landing-zone-security.sh
+chmod +x gce-deployment-default-nw.sh
+chmod +x gce-deployment-shared-vpc.sh
 chmod +x script-for-vms/controlplane-1.sh
 chmod +x script-for-vms/controlplane-2.sh
 chmod +x script-for-vms/controlplane-3.sh
@@ -37,9 +37,14 @@ chmod +x script-for-vms/workstation.sh
 echo "Enabling required APIs and Service Accounts"
 ./landing-zone-security.sh
 
-# Enable APIs and Creating Service Account
-echo "Creating VMs"
-./landing-zone-infra.sh
+# Validate the network configuration
+if [ "$NW_TYPE" = "default-vpc" ];then 
+  ./gce-deployment-default-nw.sh
+else if [ "$NW_TYPE" = "shared-vpc" ];then 
+  ./gce-deployment-shared-vpc.sh 
+else
+  echo "Creating VMs using $NW_TYPE"
+fi
 
 # Setting up VXLAN on VMs
 echo "Setting UP $ABM_WS"

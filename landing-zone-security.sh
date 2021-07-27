@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-source ./variables.env
+source variables.env
 set -eu
 
 echo ""
@@ -20,21 +20,20 @@ echo "Preparing to execute with the following values:"
 echo "==================================================="
 echo "Project ID: $PROJECT_ID"
 echo "Service Account Name: $SERVICE_ACCOUNT"
-echo "This script must be executed from Cloud Shell"
-echo "with the required privileges"
 echo "==================================================="
 echo ""
-echo "Continuing in 10 seconds. Ctrl+C to cancel"
-sleep 10
+echo "Continuing in 5 seconds. Ctrl+C to cancel"
+sleep 5
 
-# Create the service account for ABM
-gcloud iam service-accounts create $SERVICE_ACCOUNT
-
-# Create the key for the service account
-# gcloud iam service-accounts keys create bm-gcr.json \
-# --iam-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com
+check_svc_acct=`gcloud iam service-accounts list --filter "$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" | grep "$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" | wc -l | tr -d ' '`
+if [ "$check_svc_acct" = "0" ];then 
+  gcloud iam service-accounts create $SERVICE_ACCOUNT
+else
+  echo "Service Account already exists. Skipping"
+fi
 
 # Enable the required APIs
+echo "Enabling APIs"
 gcloud services enable \
     anthos.googleapis.com \
     anthosgke.googleapis.com \
@@ -71,3 +70,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" \
   --role="roles/stackdriver.resourceMetadata.writer"
+
+echo "========================="
+echo "APIs & Security Completed"
+echo "========================="
