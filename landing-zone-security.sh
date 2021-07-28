@@ -76,7 +76,15 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" \
   --role="roles/iam.serviceAccountKeyAdmin"
 
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/compute.osLogin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/osconfig.serviceAgent"
+
 echo ""
-echo "========================="
-echo "APIs & Security Completed"
-echo "========================="
+echo "==========================="
+echo " APIs & Security Completed "
+echo "==========================="
