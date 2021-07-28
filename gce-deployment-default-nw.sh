@@ -41,7 +41,7 @@ gcloud compute instances create $ABM_WS \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type e2-standard-2
@@ -57,7 +57,7 @@ gcloud compute instances create $ABM_CP1 \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -73,7 +73,7 @@ gcloud compute instances create $ABM_CP2 \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -89,7 +89,7 @@ gcloud compute instances create $ABM_CP3 \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -105,7 +105,7 @@ gcloud compute instances create $ABM_WN1 \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -121,7 +121,7 @@ gcloud compute instances create $ABM_WN2 \
         --can-ip-forward \
         --network default \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -131,6 +131,6 @@ echo "Testing if the VMs were created correctly"
 gcloud compute instances list
 
 echo ""
-echo "========================="
-echo "VMs deployment completed"
-echo "========================="
+echo "=========================="
+echo " VMs deployment completed "
+echo "=========================="

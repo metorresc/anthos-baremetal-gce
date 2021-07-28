@@ -41,7 +41,7 @@ gcloud compute instances create $ABM_WS \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type e2-standard-2
@@ -57,7 +57,7 @@ gcloud compute instances create $ABM_CP1 \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -73,7 +73,7 @@ gcloud compute instances create $ABM_CP2 \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -89,7 +89,7 @@ gcloud compute instances create $ABM_CP3 \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -105,7 +105,7 @@ gcloud compute instances create $ABM_WN1 \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
@@ -121,7 +121,7 @@ gcloud compute instances create $ABM_WN2 \
         --can-ip-forward \
         --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
-        --tags http-server,https-server \
+        --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
         --machine-type $MACHINE_TYPE
