@@ -131,6 +131,23 @@ echo "Testing if the VMs were created correctly"
 gcloud compute instances list
 
 echo ""
+echo " Creating Firewall Rules for Control Plane"
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-controlplane-10250 --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:10250
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-controlplane-443 --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:443
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-controlplane-8443 --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:8443
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-controlplane-8676 --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:8676
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-controlplane-15017 --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:15017
+
+echo ""
+echo " Creating Firewall Rules for WorkerNodes"
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=tcp:1-65535
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=udp:1-65535
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-icmp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=icmp
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-sctp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=sctp
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-esp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=esp
+gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-workernodes-ah --direction=INGRESS --network=$VPC_NAME --action=ALLOW --target-tags=abm-gce --source-ranges=$IP_RANGE --rules=ah
+
+echo ""
 echo "========================="
 echo "VMs deployment completed"
 echo "========================="
