@@ -19,8 +19,14 @@ source ./variables.env
 set -eu
 
 # SSH into the VM as root
+echo "Copying script into $ABM_WS"
+gcloud beta compute scp variables.env root@$ABM_WS:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
+
+# SSH into the VM as root
 echo "Logging as root into $ABM_WS"
 gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
+
+source ./variables.env
 
 # Installing BMCTL, KUBECTL & DOCKER
 echo "Installing bmctl, kubectl and generating keys for service account"
