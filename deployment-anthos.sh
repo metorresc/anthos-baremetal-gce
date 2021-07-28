@@ -18,7 +18,7 @@ echo "This script must be executed from the Cloud Shell"
 source ./variables.env
 set -eu
 
-# SSH into the VM as root
+# Copye variables.env to /root/ directory
 echo "Copying script into $ABM_WS"
 gcloud beta compute scp variables.env root@$ABM_WS:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
 
