@@ -40,7 +40,6 @@ gcloud compute instances create $ABM_WS \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -57,7 +56,6 @@ gcloud compute instances create $ABM_CP1 \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -74,7 +72,6 @@ gcloud compute instances create $ABM_CP2 \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -91,7 +88,6 @@ gcloud compute instances create $ABM_CP3 \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -108,7 +104,6 @@ gcloud compute instances create $ABM_WN1 \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -125,7 +120,6 @@ gcloud compute instances create $ABM_WN2 \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
         --network default \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags http-server,https-server \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \

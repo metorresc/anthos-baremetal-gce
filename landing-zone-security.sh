@@ -85,6 +85,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
   --role="roles/osconfig.serviceAgent"
 
 echo ""
-echo "==========================="
 echo " APIs & Security Completed "
-echo "==========================="
+
+tcp:10250,443,8443,8676,15017
+
