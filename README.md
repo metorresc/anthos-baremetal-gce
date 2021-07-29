@@ -49,6 +49,7 @@ If you are using a project **with** a shared vpc:
 - Run this script from Cloud Shell
 
 ## Execution Tips
-- This script is for educational purpose only.
+- This script is for **educational purpose only**.
 - There is three folders according to the specific Anthos on Bare Metal release.
-- Each folder contains a separate **variables.env** file to setup the required variables.
+- Each folder contains a separate **variables.env** file to setup each version.
+- Pick the desired release and follow the instructions.
