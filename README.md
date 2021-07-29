@@ -31,7 +31,7 @@ The scripts configure Compute Engine with the following resources:
 - No External IP assigned for GCE.
 - Single zone deployment.
 
-![alt text] (https://cloud.google.com/anthos/clusters/docs/bare-metal/1.8/images/abm_gcp_infra.svg)
+![ABM Architecture](https://cloud.google.com/anthos/clusters/docs/bare-metal/1.8/images/abm_gcp_infra.svg)
 
 ## Execution requirements
 Here is a list of the requirements depending on the scenario.
