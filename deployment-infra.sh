@@ -34,8 +34,8 @@ chmod +x landing-zone-security.sh
 chmod +x script-for-vms/controlplane-1.sh
 chmod +x script-for-vms/controlplane-2.sh
 chmod +x script-for-vms/controlplane-3.sh
-chmod +x script-for-vms/worker-node1.sh
-chmod +x script-for-vms/worker-node2.sh
+chmod +x script-for-vms/workernode-1.sh
+chmod +x script-for-vms/workernode-2.sh
 chmod +x script-for-vms/workstation.sh
 sleep 3
 
@@ -83,12 +83,12 @@ sleep 3
 
 echo ""
 echo " Setting UP $ABM_WN1 "
-./script-for-vms/worker-node1.sh
+./script-for-vms/workernode-1.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_WN2 "
-./script-for-vms/worker-node2.sh
+./script-for-vms/workernode-2.sh
 sleep 3
 
 echo ""

@@ -44,7 +44,7 @@ gcloud compute instances create $ABM_WS \
         --tags abm-gce \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type e2-standard-2
+        --machine-type $MACHINE_TYPE
 
 # Creating Anthos Control Plane # 1
 echo ""

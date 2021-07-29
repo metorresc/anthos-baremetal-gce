@@ -19,6 +19,16 @@ This script is for **educational purposes only**, is **not certified** and is **
 
      git clone https://github.com/manueltorresc/anthos-baremetal-gce.git
 
+## Architecture diagram
+The scripts configure Compute Engine with the following resources:
+
+- Six VMs to deploy the hybrid cluster:
+-- One admin VM used to deploy the hybrid cluster to the other machines.
+-- Three VMs for the three control plane nodes needed to run the hybrid cluster control plane.
+-- Two VMs for the two worker nodes needed to run workloads on the hybrid cluster.
+- A VxLAN overlay network between all the nodes to emulate L2 connectivity.
+- SSH access to the control-plane and worker nodes from the admin VM.
+
 ## Set all the deployment parameters on the variables.env file using nano or vim
 
      nano variables.env
