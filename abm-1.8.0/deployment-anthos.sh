@@ -159,9 +159,4 @@ echo ""
 echo "Creating cluster"
 bmctl create cluster -c \$clusterid
 
-echo ""
-echo "Checking the cluster deployment"
-export KUBECONFIG=$HOME/bmctl-workspace/$clusterid/$clusterid-kubeconfig
-kubectl get nodes
-
 EOF

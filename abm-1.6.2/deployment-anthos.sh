@@ -109,9 +109,9 @@ spec:
     nodePoolSpec:
       clusterName: \$clusterid
       nodes:
-      - address: 10.200.0.3
-      - address: 10.200.0.4
-      - address: 10.200.0.5
+      - address: 10.200.6.3
+      - address: 10.200.6.4
+      - address: 10.200.6.5
   clusterNetwork:
     pods:
       cidrBlocks:
@@ -124,12 +124,12 @@ spec:
     ports:
       controlPlaneLBPort: 443
     vips:
-      controlPlaneVIP: 10.200.0.49
-      ingressVIP: 10.200.0.50
+      controlPlaneVIP: 10.200.6.49
+      ingressVIP: 10.200.6.50
     addressPools:
     - name: pool1
       addresses:
-      - 10.200.0.50-10.200.0.70
+      - 10.200.6.50-10.200.6.70
   clusterOperations:
     # might need to be this location
     location: $REGION
@@ -151,17 +151,12 @@ metadata:
 spec:
   clusterName: \$clusterid
   nodes:
-  - address: 10.200.0.6
-  - address: 10.200.0.7
+  - address: 10.200.6.6
+  - address: 10.200.6.7
 EOB
 
 echo ""
 echo "Creating cluster"
 bmctl create cluster -c \$clusterid
-
-echo ""
-echo "Checking the cluster deployment"
-export KUBECONFIG=$HOME/bmctl-workspace/$clusterid/$clusterid-kubeconfig
-kubectl get nodes
 
 EOF

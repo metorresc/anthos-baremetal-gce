@@ -23,9 +23,9 @@ This script is for **educational purposes only**, is **not certified** and is **
 The scripts configure Compute Engine with the following resources:
 
 - Six VMs to deploy the hybrid cluster:
--- One admin VM used to deploy the hybrid cluster to the other machines.
--- Three VMs for the three control plane nodes needed to run the hybrid cluster control plane.
--- Two VMs for the two worker nodes needed to run workloads on the hybrid cluster.
+     - One admin VM used to deploy the hybrid cluster to the other machines.
+     - Three VMs for the three control plane nodes needed to run the hybrid cluster control plane.
+     - Two VMs for the two worker nodes needed to run workloads on the hybrid cluster.
 - A VxLAN overlay network between all the nodes to emulate L2 connectivity.
 - SSH access to the control-plane and worker nodes from the admin VM.
 
