@@ -15,23 +15,37 @@
 
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
-
-# Load Variables
 set -eu
-#source ../variables.env
 
-# Define variable i for IP aloocation
-i=2
+echo ""
+echo "Copying script into $ABM_WS"
+gcloud beta compute scp variables.env root@$ABM_WS:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
 
 # SSH into the VM as root
 gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WS"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
+
+source ./variables.env
+
+# Define variable i for IP aloocation
+i=2
 
 #Install required packages
 apt-get -qq update > /dev/null
 apt-get -qq install -y jq > /dev/null
 
 # Configure VXLAN
-echo "Configuring VXLAN on this VM"
+echo ""
+echo "Cofiguring VXLAN"
+declare -a VMs=("$ABM_WS" "$ABM_CP1" "$ABM_CP2" "$ABM_CP3" "$ABM_WN1" "$ABM_WN2")
+declare -a IPs=()
+
+for vm in "${VMs[@]}"
+do
+    IP=$(gcloud compute instances describe $vm --zone ${ZONE} \
+         --format='get(networkInterfaces[0].networkIP)')
+    IPs+=("$IP")
+done
+
 ip link add vxlan0 type vxlan id 42 dev ens4 dstport 0
 current_ip=\$(ip --json a show dev ens4 | jq '.[0].addr_info[0].local' -r)
 echo "VM IP address is: \$current_ip"

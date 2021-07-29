@@ -19,9 +19,9 @@ source ./variables.env
 set -eu
 
 # Copy variables.env to /root/ directory
-echo ""
-echo "Copying script into $ABM_WS"
-gcloud beta compute scp variables.env root@$ABM_WS:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
+# echo ""
+# echo "Copying script into $ABM_WS"
+# gcloud beta compute scp variables.env root@$ABM_WS:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
 
 # SSH into the VM as root
 echo ""
