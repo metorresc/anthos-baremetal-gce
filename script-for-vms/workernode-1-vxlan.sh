@@ -13,29 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script must be executed from the Anthos Workstation
-echo "This script must be executed from the Cloud Shell" 
-set -eu
-
+# Loading variables
 echo ""
-echo "Copying script into $ABM_WN1"
-gcloud beta compute scp variables.env root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
-
-# SSH into the VM as root
-gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WN1"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
-
+echo "Loanding .env file"
 source ./variables.env
-
-# Define variable i for IP aloocation
-i=6
+export i=6
 
 #Install required packages
+echo ""
+echo "Installing required packages"
 apt-get -qq update > /dev/null
 apt-get -qq install -y jq > /dev/null
 
 # Configure VXLAN
 echo ""
-echo "Cofiguring VXLAN"
+echo "Getting existing nodes IP address"
 declare -a VMs=("$ABM_WS" "$ABM_CP1" "$ABM_CP2" "$ABM_CP3" "$ABM_WN1" "$ABM_WN2")
 declare -a IPs=()
 
@@ -46,16 +38,22 @@ do
     IPs+=("$IP")
 done
 
+echo ""
+echo "Configuring VXLAN"
 ip link add vxlan0 type vxlan id 42 dev ens4 dstport 0
-current_ip=\$(ip --json a show dev ens4 | jq '.[0].addr_info[0].local' -r)
-echo "VM IP address is: \$current_ip"
+current_ip=$(ip --json a show dev ens4 | jq '.[0].addr_info[0].local' -r)
+echo "VM IP address is: $current_ip"
 for ip in ${IPs[@]}; do
-    if [ "\$ip" != "\$current_ip" ]; then
-        bridge fdb append to 00:00:00:00:00:00 dst \$ip dev vxlan0
+    if [ "$ip" != "$current_ip" ]; then
+        bridge fdb append to 00:00:00:00:00:00 dst $ip dev vxlan0
     fi
 done
 ip addr add 10.200.0.$i/24 dev vxlan0
+echo ""
+echo "Enabling VXLAN"
 ip link set up dev vxlan0
+
+echo ""
+echo "Disabling AppArmor Service"
 systemctl stop apparmor.service
 systemctl disable apparmor.service
-EOF

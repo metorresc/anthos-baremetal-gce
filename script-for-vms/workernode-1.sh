@@ -13,19 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script must be executed from the Anthos Workstation or Cloud Shell
-
 # This script must be executed from the Anthos Workstation
 echo "This script must be executed from the Cloud Shell" 
 set -eu
 
 echo ""
-echo "Copying script into $ABM_CP1"
-gcloud beta compute scp variables.env root@$ABM_CP1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
-gcloud beta compute scp script-for-vms/controlplane-1-vxlan.sh root@$ABM_CP1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
+echo "Copying script into $ABM_WN1"
+gcloud beta compute scp variables.env root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
+gcloud beta compute scp script-for-vms/workernode-1-vxlan.sh root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
 
 # SSH into the VM as root
-gcloud beta compute ssh --zone "$ZONE" "root@$ABM_CP1"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
-chmod +x controlplane-1-vxlan.sh
-./controlplane-1-vxlan.sh
+gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WN1"  --tunnel-through-iap --project "$PROJECT_ID" << EOF
+chmod +x workernode-1-vxlan.sh
+./workernode-1-vxlan.sh
 EOF
