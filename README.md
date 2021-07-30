@@ -23,27 +23,33 @@ This script is for **educational purposes only**, is **not certified** and is **
 The scripts configure Compute Engine with the following resources:
 
 - Six VMs to deploy the hybrid cluster:
--- One admin VM used to deploy the hybrid cluster to the other machines.
--- Three VMs for the three control plane nodes needed to run the hybrid cluster control plane.
--- Two VMs for the two worker nodes needed to run workloads on the hybrid cluster.
+     - One admin VM used to deploy the hybrid cluster to the other machines.
+     - Three VMs for the three control plane nodes needed to run the hybrid cluster control plane.
+     - Two VMs for the two worker nodes needed to run workloads on the hybrid cluster.
 - A VxLAN overlay network between all the nodes to emulate L2 connectivity.
 - SSH access to the control-plane and worker nodes from the admin VM.
+- No External IP assigned for GCE.
+- Single zone deployment.
 
-## Set all the deployment parameters on the variables.env file using nano or vim
+![ABM Architecture](https://cloud.google.com/anthos/clusters/docs/bare-metal/1.8/images/abm_gcp_infra.svg)
 
-     nano variables.env
+## Execution requirements
+Here is a list of the requirements depending on the scenario.
 
-or
+If you are using a project **without** a shared vpc:
+- Pick up a Google Cloud Region for deployment.
+- Create a Cloud Router in the selected region, an example of how to do it is available at the following [link](https://cloud.google.com/network-connectivity/docs/router/how-to/creating-routers#before_you_begin)
+- Create a Cloud NAT instance in the selected region to grant Internet access to the GCE VMs, an example of how to do it is available at the following [link](https://cloud.google.com/nat/docs/using-nat#set_up_a_simple_configuration)
+- Run this script from Cloud Shell
 
-     vim variables.env
+If you are using a project **with** a shared vpc:
+- Pick up a Google Cloud Region for deployment.
+- Validate that your existing VPC has a Cloud Router in the selected region, or create a new one using this [link](https://cloud.google.com/network-connectivity/docs/router/how-to/creating-routers#before_you_begin)
+- Validate that your existing VPC has a Cloud NAT in the selected region, or create a new one using this [link](https://cloud.google.com/nat/docs/using-nat#set_up_a_simple_configuration)
+- Run this script from Cloud Shell
 
-## This script must be executed from Cloud Shell
-For GCE Infra deployment please execute
-
-     chmod +x deployment-infra.sh
-     ./deployment-infra.sh
-
-For Anthos Software deployment on GCE please execute
-     
-     chmod +x deployment-anthos.sh
-     ./deployment-anthos.sh
+## Execution Tips
+- This script is for **educational purpose only**.
+- There is three folders according to the specific Anthos on Bare Metal release.
+- Each folder contains a separate **variables.env** file to setup each version.
+- Pick the desired release and follow the instructions.

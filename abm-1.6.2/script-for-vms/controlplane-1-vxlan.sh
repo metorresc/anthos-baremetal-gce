@@ -17,7 +17,7 @@
 echo ""
 echo "Loanding .env file"
 source ./variables.env
-export i=5
+export i=3
 
 #Install required packages
 echo ""
@@ -48,7 +48,7 @@ for ip in ${IPs[@]}; do
         bridge fdb append to 00:00:00:00:00:00 dst $ip dev vxlan0
     fi
 done
-ip addr add 10.200.0.$i/24 dev vxlan0
+ip addr add 10.200.6.$i/24 dev vxlan0
 echo ""
 echo "Enabling VXLAN"
 ip link set up dev vxlan0

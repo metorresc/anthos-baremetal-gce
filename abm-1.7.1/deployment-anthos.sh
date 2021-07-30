@@ -52,7 +52,7 @@ mv kubectl /usr/local/sbin/
 echo ""
 echo "Installing bmctl"
 mkdir baremetal && cd baremetal
-gsutil cp gs://anthos-baremetal-release/bmctl/1.6.2/linux-amd64/bmctl .
+gsutil cp gs://anthos-baremetal-release/bmctl/1.7.1/linux-amd64/bmctl .
 chmod a+x bmctl
 mv bmctl /usr/local/sbin/
 
@@ -102,16 +102,16 @@ metadata:
   namespace: cluster-\$clusterid
 spec:
   type: hybrid
-  anthosBareMetalVersion: 1.6.2
+  anthosBareMetalVersion: 1.7.1
   gkeConnect:
     projectID: \$PROJECT_ID
   controlPlane:
     nodePoolSpec:
       clusterName: \$clusterid
       nodes:
-      - address: 10.200.0.3
-      - address: 10.200.0.4
-      - address: 10.200.0.5
+      - address: 10.200.7.3
+      - address: 10.200.7.4
+      - address: 10.200.7.5
   clusterNetwork:
     pods:
       cidrBlocks:
@@ -124,12 +124,12 @@ spec:
     ports:
       controlPlaneLBPort: 443
     vips:
-      controlPlaneVIP: 10.200.0.49
-      ingressVIP: 10.200.0.50
+      controlPlaneVIP: 10.200.7.49
+      ingressVIP: 10.200.7.50
     addressPools:
     - name: pool1
       addresses:
-      - 10.200.0.50-10.200.0.70
+      - 10.200.7.50-10.200.7.70
   clusterOperations:
     # might need to be this location
     location: $REGION
@@ -151,17 +151,12 @@ metadata:
 spec:
   clusterName: \$clusterid
   nodes:
-  - address: 10.200.0.6
-  - address: 10.200.0.7
+  - address: 10.200.7.6
+  - address: 10.200.7.7
 EOB
 
 echo ""
 echo "Creating cluster"
 bmctl create cluster -c \$clusterid
-
-echo ""
-echo "Checking the cluster deployment"
-export KUBECONFIG=$HOME/bmctl-workspace/$clusterid/$clusterid-kubeconfig
-kubectl get nodes
 
 EOF
