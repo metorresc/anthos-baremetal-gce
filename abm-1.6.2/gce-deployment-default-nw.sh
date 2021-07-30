@@ -139,7 +139,7 @@ echo " Creating Firewall Rules for WorkerNodes"
 gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce --target-tags=abm-gce --rules=tcp:1-65535
 gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce --target-tags=abm-gce --rules=udp:1-65535
 gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce --target-tags=abm-gce --rules=icmp,sctp,esp,ah
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce --rules=tcp:22
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce --rules=tcp:22
 
 echo ""
 echo "=========================="
