@@ -44,7 +44,7 @@ echo ""
 echo "============================================="
 echo " Enabling required APIs and Service Accounts "
 echo "============================================="
-./landing-zone-security.sh
+./scripts/landing/landing-zone-security.sh
 sleep 3
 
 # Validate the network configuration
@@ -54,41 +54,41 @@ echo " Pre Checks for VM Creation "
 echo "============================"
 
 if [ "$NW_TYPE" = "default-vpc" ];then 
-  ./gce-deployment-default-nw.sh
+  ./scripts/for-vms/gce-deployment-default-nw.sh
 else
-  ./gce-deployment-shared-vpc.sh 
+  ./scripts/for-vms/gce-deployment-shared-vpc.sh 
 fi
 sleep 3
 
 # Setting up VXLAN on VMs
 echo ""
 echo " Setting UP $ABM_WS "
-./script-for-vms/workstation.sh
+./scripts/for-vms/workstation.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_CP1 "
-./script-for-vms/controlplane-1.sh
+./scripts/for-vms/controlplane-1.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_CP2 "
-./script-for-vms/controlplane-2.sh
+./scripts/for-vms/controlplane-2.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_CP3 "
-./script-for-vms/controlplane-3.sh
+./scripts/for-vms/controlplane-3.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_WN1 "
-./script-for-vms/workernode-1.sh
+./scripts/for-vms/workernode-1.sh
 sleep 3
 
 echo ""
 echo " Setting UP $ABM_WN2 "
-./script-for-vms/workernode-2.sh
+./scripts/for-vms/workernode-2.sh
 sleep 3
 
 echo ""

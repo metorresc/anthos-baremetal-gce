@@ -39,12 +39,11 @@ gcloud compute instances create $ABM_WS \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 # Creating Anthos Control Plane # 1
 echo ""
@@ -55,12 +54,11 @@ gcloud compute instances create $ABM_CP1 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 # Creating Anthos Control Plane # 2
 echo ""
@@ -71,12 +69,11 @@ gcloud compute instances create $ABM_CP2 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 # Creating Anthos Control Plane # 3
 echo ""
@@ -87,12 +84,11 @@ gcloud compute instances create $ABM_CP3 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 # Creating Anthos Worker Node # 1
 echo ""
@@ -103,12 +99,11 @@ gcloud compute instances create $ABM_WN1 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 # Creating Anthos Worker Node # 2
 echo ""
@@ -119,12 +114,11 @@ gcloud compute instances create $ABM_WN2 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
-        --subnet=projects/$SHARED_VPC_PROJECT_ID/regions/$REGION/subnetworks/$SUBNET_NAME \
         --no-address \
         --tags abm-gce-v180 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
         --scopes cloud-platform \
-        --machine-type $MACHINE_TYPE
+        --machine-type $MACHINE_TYPE || :
 
 echo ""
 echo "Testing if the VMs were created correctly"
@@ -132,16 +126,16 @@ gcloud compute instances list
 
 echo ""
 echo " Creating Firewall Rules for Control Plane"
-gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-v180-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017
 
 echo ""
 echo " Creating Firewall Rules for WorkerNodes"
-gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-v180-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:1-65535
-gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-v180-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=udp:1-65535
-gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-v180-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=icmp,sctp,esp,ah
-gcloud compute --project=$SHARED_VPC_PROJECT_ID firewall-rules create abm-gce-v180-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v180 --rules=tcp:22
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:1-65535
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=udp:1-65535
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=icmp,sctp,esp,ah
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v180 --rules=tcp:22
 
 echo ""
-echo "========================="
-echo "VMs deployment completed"
-echo "========================="
+echo "=========================="
+echo " VMs deployment completed "
+echo "=========================="
