@@ -22,8 +22,8 @@ kubectl get nodes
 kubectl create serviceaccount ${K8S_SERVICE_ACCOUNT}
 
 # Read Only Access to the K8s Service Account
-kubectl create clusterrolebinding ksa-viewer-$clusterid --clusterrole view --serviceaccount default:${K8S_SERVICE_ACCOUNT}
-#kubectl create clusterrolebinding cloud-console-reader --clusterrole cloud-console-reader --serviceaccount default:${K8S_SERVICE_ACCOUNT}
+# kubectl create clusterrolebinding ksa-viewer-$clusterid --clusterrole view --serviceaccount default:${K8S_SERVICE_ACCOUNT}
+# kubectl create clusterrolebinding cloud-console-reader --clusterrole cloud-console-reader --serviceaccount default:${K8S_SERVICE_ACCOUNT}
 
 # Admin Access to the K8s Service Account
 kubectl create clusterrolebinding cloud-console-reader --clusterrole cluster-admin --serviceaccount default:${K8S_SERVICE_ACCOUNT}

@@ -1,6 +1,12 @@
 # anthos-baremetal-gce by mtorresc@google.com
 This script is for **educational purposes only**, is **not certified** and is **not recommended** for production environments.
 
+---
+
+This is not an official Google project.
+
+---
+
 ## Copyright 2021 Google LLC
 
  Licensed under the Apache License, Version 2.0 (the "License");

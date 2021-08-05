@@ -28,15 +28,15 @@ echo ""
 echo "============================================="
 echo " Granting execution privileges to the script "
 echo "============================================="
-chmod +x gce-deployment-default-nw.sh
-chmod +x gce-deployment-shared-vpc.sh
-chmod +x landing-zone-security.sh
-chmod +x script-for-vms/controlplane-1.sh
-chmod +x script-for-vms/controlplane-2.sh
-chmod +x script-for-vms/controlplane-3.sh
-chmod +x script-for-vms/workernode-1.sh
-chmod +x script-for-vms/workernode-2.sh
-chmod +x script-for-vms/workstation.sh
+chmod +x scripts/for-vms/gce-deployment-default-nw.sh
+chmod +x scripts/for-vms/gce-deployment-shared-vpc.sh
+chmod +x scripts/landing/landing-zone-security.sh
+chmod +x scripts/for-vms/controlplane-1.sh
+chmod +x scripts/for-vms/controlplane-2.sh
+chmod +x scripts/for-vms/controlplane-3.sh
+chmod +x scripts/for-vms/workernode-1.sh
+chmod +x scripts/for-vms/workernode-2.sh
+chmod +x scripts/for-vms/workstation.sh
 sleep 3
 
 # Enable APIs and Creating Service Account
