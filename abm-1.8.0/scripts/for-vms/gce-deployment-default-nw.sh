@@ -38,6 +38,8 @@ gcloud compute instances create $ABM_WS \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -53,6 +55,8 @@ gcloud compute instances create $ABM_CP1 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -68,6 +72,8 @@ gcloud compute instances create $ABM_CP2 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -83,6 +89,8 @@ gcloud compute instances create $ABM_CP3 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -98,6 +106,8 @@ gcloud compute instances create $ABM_WN1 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -113,6 +123,8 @@ gcloud compute instances create $ABM_WN2 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v180 \
@@ -126,14 +138,14 @@ gcloud compute instances list
 
 echo ""
 echo " Creating Firewall Rules for Control Plane"
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017 || :
 
 echo ""
 echo " Creating Firewall Rules for WorkerNodes"
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:1-65535
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=udp:1-65535
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=icmp,sctp,esp,ah
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v180 --rules=tcp:22
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=tcp:1-65535 || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=udp:1-65535 || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v180 --target-tags=abm-gce-v180 --rules=icmp,sctp,esp,ah || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v180-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v180 --rules=tcp:22 || :
 
 echo ""
 echo "=========================="

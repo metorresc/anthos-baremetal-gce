@@ -38,6 +38,8 @@ gcloud compute instances create $ABM_WS \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v171 \
@@ -53,6 +55,8 @@ gcloud compute instances create $ABM_CP1 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v171 \
@@ -69,6 +73,8 @@ gcloud compute instances create $ABM_CP2 \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
         --can-ip-forward \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --no-address \
         --tags abm-gce-v171 \
         --service-account=$SERVICE_ACCOUNT@$PROJECT_ID.iam.gserviceaccount.com \
@@ -83,6 +89,8 @@ gcloud compute instances create $ABM_CP3 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v171 \
@@ -98,6 +106,8 @@ gcloud compute instances create $ABM_WN1 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v171 \
@@ -113,6 +123,8 @@ gcloud compute instances create $ABM_WN2 \
         --zone=$ZONE \
         --boot-disk-size 200G \
         --boot-disk-type pd-ssd \
+        --network $VPC_NAME \
+        --subnet $SUBNET_NAME \
         --can-ip-forward \
         --no-address \
         --tags abm-gce-v171 \
