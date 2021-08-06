@@ -1,4 +1,5 @@
-# anthos-baremetal-gce by mtorresc@google.com
+# This is not an official Google project.
+
 This script is for **educational purposes only**, is **not certified** and is **not recommended** for production environments.
 
 ## Copyright 2021 Google LLC
@@ -14,12 +15,6 @@ This script is for **educational purposes only**, is **not certified** and is **
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
-
----
-
-This is not an official Google project.
-
----
 
 ## Clone this repository to begin
 
