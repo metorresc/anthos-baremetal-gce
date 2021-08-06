@@ -1,6 +1,12 @@
 # anthos-baremetal-gce by mtorresc@google.com
 This script is for **educational purposes only**, is **not certified** and is **not recommended** for production environments.
 
+---
+
+This is not an official Google project.
+
+---
+
 ## Copyright 2021 Google LLC
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,3 +53,7 @@ For Anthos Software deployment on GCE please execute
      
      chmod +x deployment-anthos.sh
      ./deployment-anthos.sh
+
+## Next Steps (Optional)
+- Login into the cluster, documentation [here](https://cloud.google.com/anthos/multicluster-management/console/logging-in#logging_in_using_a_bearer_token)
+- Deploy a Sample App, documentation [here](https://cloud.google.com/anthos/clusters/docs/on-prem/1.8/how-to/deploy-first-app)

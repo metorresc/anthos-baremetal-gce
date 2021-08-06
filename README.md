@@ -15,6 +15,12 @@ This script is for **educational purposes only**, is **not certified** and is **
  See the License for the specific language governing permissions and
  limitations under the License.
 
+---
+
+This is not an official Google project.
+
+---
+
 ## Clone this repository to begin
 
      git clone https://github.com/manueltorresc/anthos-baremetal-gce.git
