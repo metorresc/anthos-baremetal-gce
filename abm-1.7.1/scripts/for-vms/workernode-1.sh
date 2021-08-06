@@ -20,7 +20,7 @@ set -eu
 echo ""
 echo "Copying script into $ABM_WN1"
 gcloud beta compute scp variables.env root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
-gcloud beta compute scp script-for-vms/workernode-1-vxlan.sh root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
+gcloud beta compute scp scripts/for-vms/workernode-1-vxlan.sh root@$ABM_WN1:~ --zone "$ZONE" --tunnel-through-iap --project "$PROJECT_ID"
 
 # SSH into the VM as root
 gcloud beta compute ssh --zone "$ZONE" "root@$ABM_WN1"  --tunnel-through-iap --project "$PROJECT_ID" << EOF

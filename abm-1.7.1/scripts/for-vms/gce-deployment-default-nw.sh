@@ -126,14 +126,14 @@ gcloud compute instances list
 
 echo ""
 echo " Creating Firewall Rules for Control Plane"
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-controlplane-ports --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=tcp:10250,tcp:443,tcp:8443,tcp:8676,tcp:15017 || :
 
 echo ""
 echo " Creating Firewall Rules for WorkerNodes"
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=tcp:1-65535
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=udp:1-65535
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=icmp,sctp,esp,ah
-gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v171 --rules=tcp:22
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-tcp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=tcp:1-65535 || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-udp --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=udp:1-65535 || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-workernodes-other-protocols --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-tags=abm-gce-v171 --target-tags=abm-gce-v171 --rules=icmp,sctp,esp,ah || :
+gcloud compute --project=$PROJECT_ID firewall-rules create abm-gce-v171-allow-ssh-ingress-from-iap --direction=INGRESS --network=$VPC_NAME --action=ALLOW --source-ranges=35.235.240.0/20 --target-tags=abm-gce-v171 --rules=tcp:22 || :
 
 echo ""
 echo "=========================="
