@@ -40,7 +40,7 @@ done
 
 echo ""
 echo "Configuring VXLAN"
-ip link add vxlan0 type vxlan id 42 dev ens4 dstport 0
+ip link add vxlan0 type vxlan id 47 dev ens4 dstport 0
 current_ip=$(ip --json a show dev ens4 | jq '.[0].addr_info[0].local' -r)
 echo "VM IP address is: $current_ip"
 for ip in ${IPs[@]}; do
