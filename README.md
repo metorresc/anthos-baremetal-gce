@@ -18,7 +18,7 @@ This script is for **educational purposes only**, is **not certified** and is **
 
 ## Clone this repository to begin
 
-     git clone https://github.com/manueltorresc/anthos-baremetal-gce.git
+     git clone https://github.com/metorresc/anthos-baremetal-gce.git
 
 ## Architecture diagram
 The scripts configure Compute Engine with the following resources:
